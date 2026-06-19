@@ -6,6 +6,12 @@ import { IconSymbol } from '@/components/ui/icon-symbol';
 import { Colors } from '@/constants/theme';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 
+
+
+/**
+ * @TODO Webcurrently not working due to navigation through tabs compatible only with mobile
+ * @returns currently weather data of three geographical points
+ */
 export default function TabLayout() {
   const colorScheme = useColorScheme();
 

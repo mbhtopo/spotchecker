@@ -1,28 +1,62 @@
-import { useEffect } from "react";
-import { Text, View } from "react-native";
+import React, { useEffect, useState } from "react";
+import { ScrollView, Text, View } from "react-native";
 
-//dont use app here as name instead of homescreen
+/**
+ * @TODO Webcurrently not working due to navigation through tabs compatible only with mobile
+ * @returns currently weather data of three geographical points
+ */
+
+//dont use app here as name instead of homescreen, will be confused
 export default function homescreen() {
+  type WeatherSpot = {
+  name: string;
+  temperature: number;
+  };
+  // api must know from which spots to recall weather data
+  const spots = [
+    { name: "Berlin", lat: 52.52, lon: 13.41 },
+    { name: "Hamburg", lat: 53.55, lon: 9.99 },
+    { name: "Köln", lat: 50.94, lon: 6.96 }
+  ];
+  // now actually recall the spots data and set data in array
+  const [weatherData, setWeatherData] = useState<WeatherSpot[]>([]);
+
 
   useEffect(() => {
-    //ftch weather data
+    // call function to get data
     fetchWeatherData();
   }, [])
  
   async function fetchWeatherData() {
     try{
-      const response = await fetch("https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&current=temperature_2m");
+      const results = await Promise.all(
+        spots.map(async (spot) => {
+      const response = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${spot.lat}&longitude=${spot.lon}&current=temperature_2m`);
+      
       const data = await response.json();
-      console.log(data)
+      console.log("data:", data);    
+      return {
+        name: spot.name,
+        temperature: data.current.temperature_2m,
+      };
+        })
+      );
+      setWeatherData(results);
+
     } catch(e){
       console.log(e);
     }
-    
   }
 
-  return (
-      <View>
-        <Text>hello surfers !</Text>
-      </View>
+  return(
+     <ScrollView>
+      {weatherData.map((spot) => (
+        <View key={spot.name}>
+          <Text>{spot.name}</Text>
+          <Text>{spot.temperature}°C</Text>
+          <Text>{JSON.stringify(weatherData)}</Text>
+        </View>
+      ))}
+    </ScrollView>
   );
 }
