@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 import { ScrollView, Text, View } from "react-native";
 
@@ -58,5 +59,21 @@ export default function homescreen() {
         </View>
       ))}
     </ScrollView>
+    /**
+     * @TODO next big: 
+     * Make a button 
+     * Action: On press it takes (trial) two spots and compares their conditionscore
+     * A conditionscore is a score (possible scala is: 1-5 1:worst) which compares the currentData of one spot 
+     * and compares them to the spots idealData
+     * 
+     * Return: Is a list of the spot with the best conditions until the one with the worst
+     * 
+     * @TODO next small:
+     * - What conditions should be compared ? 
+     * - put them in the output of the view
+     * - based on the conditions, prepare database and set the ideal conditions of a spot
+     * 
+     *   
+     */
   );
 }
