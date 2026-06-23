@@ -73,6 +73,8 @@ export default function homescreen() {
      * - put them in the output of the view
      * - based on the conditions, prepare database and set the ideal conditions of a spot
      * 
+     * @Done 
+     * - initiated databank on MySQL
      *   
      */
   );
