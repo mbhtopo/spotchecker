@@ -75,6 +75,10 @@ export default function homescreen() {
      * 
      * @Done 
      * - initiated databank on MySQL
+     * @Done
+     * - Filled database with tables and dummy data
+     * @Now
+     * We want to connect node js and sql 
      *   
      */
   );
